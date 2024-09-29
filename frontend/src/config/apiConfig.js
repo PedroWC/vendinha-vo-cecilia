@@ -1,0 +1,21 @@
+const API_BASE_URL = 'http://localhost/api';  // Base URL da sua API
+
+export const endpoints = {
+    auth: {
+        login: `${API_BASE_URL}/auth/login`,
+    },
+    products: {
+        getAll: `${API_BASE_URL}/product`,
+        getById: (id) => `${API_BASE_URL}/products/${id}`,
+        create: `${API_BASE_URL}/product`,
+        update: (id) => `${API_BASE_URL}/products/${id}`,
+        delete: (id) => `${API_BASE_URL}/products/${id}`,
+    },
+    users: {
+        getAll: `${API_BASE_URL}/user`,
+        getById: (id) => `${API_BASE_URL}/users/${id}`,
+        create: `${API_BASE_URL}/user`,
+        update: (id) => `${API_BASE_URL}/users/${id}`,
+        delete: (id) => `${API_BASE_URL}/users/${id}`,
+    },
+};
