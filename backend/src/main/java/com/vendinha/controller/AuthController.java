@@ -1,52 +1,48 @@
 package com.vendinha.controller;
 
-import com.vendinha.util.AuthenticationRequest;
-import com.vendinha.util.security.JwtUtil;
-import com.vendinha.service.UserService;
+import com.vendinha.dto.LoginDTO;
+import com.vendinha.service.AuthService;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.media.Content;
 import io.swagger.v3.oas.annotations.media.Schema;
 import io.swagger.v3.oas.annotations.responses.ApiResponse;
 import io.swagger.v3.oas.annotations.responses.ApiResponses;
-import io.swagger.v3.oas.annotations.tags.Tag;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.security.authentication.AuthenticationManager;
-import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
-import org.springframework.security.core.Authentication;
-import org.springframework.security.core.userdetails.UserDetails;
-import org.springframework.web.bind.annotation.*;
+import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RestController;
 
 @RestController
 @RequestMapping("/api/auth")
-@Tag(name = "Autenticação", description = "API para autenticação de usuários")
 public class AuthController {
 
-    private final AuthenticationManager authenticationManager;
-    private final JwtUtil jwtUtil;
-    private final UserService userService;
+    private final AuthService authService;
 
+    // Injeção de dependências
     @Autowired
-    public AuthController(AuthenticationManager authenticationManager, JwtUtil jwtUtil, UserService userService) {
-        this.authenticationManager = authenticationManager;
-        this.jwtUtil = jwtUtil;
-        this.userService = userService;
+    public AuthController(AuthService authService) {
+        this.authService = authService;
     }
 
-    @Operation(summary = "Autenticar usuário", description = "Autentica um usuário com base nas credenciais fornecidas e retorna um token JWT.")
+    @Operation(summary = "Autentica o usuário e retorna um token de acesso")
     @ApiResponses(value = {
-            @ApiResponse(responseCode = "200", description = "Autenticado com sucesso, JWT gerado",
-                    content = @Content(mediaType = "application/json")),
+            @ApiResponse(responseCode = "200", description = "Autenticação bem-sucedida", content = {
+                    @Content(mediaType = "application/json", schema = @Schema(implementation = String.class))
+            }),
             @ApiResponse(responseCode = "401", description = "Credenciais inválidas", content = @Content),
-            @ApiResponse(responseCode = "500", description = "Erro interno do servidor", content = @Content)
+            @ApiResponse(responseCode = "500", description = "Erro interno no servidor", content = @Content)
     })
     @PostMapping("/login")
-    public String createAuthenticationToken(
-            @RequestBody AuthenticationRequest authRequest) throws Exception {
-
-        Authentication authentication = authenticationManager.authenticate(
-                new UsernamePasswordAuthenticationToken(authRequest.getUsername(), authRequest.getPassword()));
-
-        UserDetails userDetails = userService.loadUserByUsername(authRequest.getUsername());
-        return jwtUtil.generateToken(userDetails);
+    public ResponseEntity<?> login(@RequestBody LoginDTO loginDTO) {
+        try {
+            String token = authService.authenticateUser(loginDTO.getEmail(), loginDTO.getPassword());
+            // Se a autenticação for bem-sucedida, retorna o token de autenticação
+            return ResponseEntity.ok(token);
+        } catch (Exception e) {
+            // Caso contrário, retorna uma mensagem de erro
+            return ResponseEntity.status(401).body("Email ou senha inválidos.");
+        }
     }
 }

@@ -4,9 +4,11 @@ import com.vendinha.dto.UserDTO;
 import com.vendinha.model.User;
 import com.vendinha.repository.UserRepository;
 import com.vendinha.util.mapper.UserMapper;
+import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -18,21 +20,22 @@ public class UserService {
 
     private final UserRepository userRepository;
     private final UserMapper userMapper;
+    private final PasswordEncoder passwordEncoder;
 
     @Autowired
-    public UserService(UserRepository userRepository, UserMapper userMapper) {
+    public UserService(UserRepository userRepository, UserMapper userMapper, PasswordEncoder passwordEncoder) {
         this.userRepository = userRepository;
         this.userMapper = userMapper;
+        this.passwordEncoder = passwordEncoder;
     }
 
-    public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
-        User user = userRepository.findByUsername(username)
-                .orElseThrow(() -> new UsernameNotFoundException("Usuário não encontrado com o username: " + username));
+    public UserDetails loadUserByEmail(String email) throws UsernameNotFoundException {
+        User user = userRepository.findByEmail(email)
+                .orElseThrow(() -> new UsernameNotFoundException("Usuário não encontrado com o email: " + email));
 
         return org.springframework.security.core.userdetails.User
-                .withUsername(user.getUsername())
+                .withUsername(user.getEmail())
                 .password(user.getPassword())
-                .authorities("ROLE_USER")
                 .accountExpired(false)
                 .accountLocked(false)
                 .credentialsExpired(false)
@@ -40,28 +43,35 @@ public class UserService {
                 .build();
     }
 
-    // Retorna todos os usuários convertidos para DTO
     public List<UserDTO> getAllUsers() {
         return userRepository.findAll().stream()
                 .map(userMapper::toDto)
                 .collect(Collectors.toList());
     }
 
-    // Retorna um usuário pelo ID, convertendo-o para DTO
     public UserDTO getUserById(Long id) {
         User user = userRepository.findById(id)
                 .orElseThrow(() -> new RuntimeException("Usuário não encontrado!"));
         return userMapper.toDto(user);
     }
 
-    // Cria um novo usuário, recebendo um DTO, convertendo-o para entidade e salvando no banco
-    public UserDTO saveUser(UserDTO userDTO) {
-        User user = userMapper.toEntity(userDTO);
-        User savedUser = userRepository.save(user);
+    public UserDTO saveUser(@Valid UserDTO userDTO) {
+
+        // Garantir que o Bean Validation tenha sido aplicado corretamente
+        if (userDTO.getPassword() == null || userDTO.getPassword().isEmpty()) {
+            throw new RuntimeException("A senha não pode ser nula ou vazia");
+        }
+
+        User userEntity = this.userMapper.toEntity(userDTO);
+
+        userEntity.setPassword(passwordEncoder.encode(userEntity.getPassword()));
+
+        User savedUser = userRepository.save(userEntity);
+
         return userMapper.toDto(savedUser);
     }
 
-    // Atualiza um usuário existente com base no ID e dados do DTO
+
     public UserDTO updateUser(Long id, UserDTO userDTO) {
         Optional<User> userOptional = userRepository.findById(id);
 
@@ -70,7 +80,6 @@ public class UserService {
             user.setUsername(userDTO.getUsername());
             user.setEmail(userDTO.getEmail());
             user.setPassword(userDTO.getPassword());
-            user.setRole(userDTO.getRole());
 
             User updatedUser = userRepository.save(user);
             return userMapper.toDto(updatedUser);
@@ -79,7 +88,6 @@ public class UserService {
         }
     }
 
-    // Deleta um usuário pelo ID
     public void deleteUser(Long id) {
         if (userRepository.existsById(id)) {
             userRepository.deleteById(id);

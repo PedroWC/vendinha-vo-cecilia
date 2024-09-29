@@ -43,8 +43,8 @@ public class SecurityConfig {
         http
                 .csrf(AbstractHttpConfigurer::disable)
                 .authorizeHttpRequests(auth -> auth
-                        .requestMatchers("/api/auth/**").permitAll() // Endpoints de autenticação são públicos
-                        .anyRequest().authenticated() // Outros endpoints precisam de autenticação
+                        .requestMatchers("/**").permitAll() // Endpoints de autenticação públicos
+                        .anyRequest().authenticated() // Outros endpoints autenticados
                 )
                 .sessionManagement(sess -> sess.sessionCreationPolicy(SessionCreationPolicy.STATELESS)); // JWT é stateless
 

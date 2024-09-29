@@ -3,11 +3,11 @@ package com.vendinha.controller;
 import com.vendinha.dto.UserDTO;
 import com.vendinha.service.UserService;
 import io.swagger.v3.oas.annotations.Operation;
-import io.swagger.v3.oas.annotations.tags.Tag;
-import io.swagger.v3.oas.annotations.responses.ApiResponse;
-import io.swagger.v3.oas.annotations.responses.ApiResponses;
 import io.swagger.v3.oas.annotations.media.Content;
 import io.swagger.v3.oas.annotations.media.Schema;
+import io.swagger.v3.oas.annotations.responses.ApiResponse;
+import io.swagger.v3.oas.annotations.responses.ApiResponses;
+import io.swagger.v3.oas.annotations.tags.Tag;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -21,6 +21,7 @@ public class UserController {
 
     private final UserService userService;
 
+    // Injeção de dependências
     @Autowired
     public UserController(UserService userService) {
         this.userService = userService;
@@ -49,6 +50,7 @@ public class UserController {
     @GetMapping("/{id}")
     public ResponseEntity<UserDTO> getUserById(@PathVariable Long id) {
         UserDTO user = userService.getUserById(id);
+        // TODO: Validação da resposta se o usuário não for encontrado
         return ResponseEntity.ok(user);
     }
 

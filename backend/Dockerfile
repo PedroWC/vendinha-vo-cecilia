@@ -1,5 +1,5 @@
 # Usar a imagem oficial do OpenJDK 23
-FROM openjdk:23-jdk-slim
+FROM openjdk:20-jdk-slim
 
 # Definir o diretório de trabalho dentro do container
 WORKDIR /app

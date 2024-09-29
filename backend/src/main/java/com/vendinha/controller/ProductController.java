@@ -21,6 +21,7 @@ public class ProductController {
 
     private final ProductService productService;
 
+    // Injeção de dependências
     @Autowired
     public ProductController(ProductService productService) {
         this.productService = productService;

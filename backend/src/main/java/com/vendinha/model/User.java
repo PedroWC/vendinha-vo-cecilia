@@ -1,13 +1,15 @@
 package com.vendinha.model;
 
 import jakarta.persistence.*;
-import lombok.*;
+import lombok.AllArgsConstructor;
+import lombok.Data;
+import lombok.NoArgsConstructor;
 
 @Entity
 @Table(name = "users")
-@Data // Gera getters, setters, equals, hashCode e toString automaticamente
-@NoArgsConstructor // Gera um construtor vazio
-@AllArgsConstructor // Gera um construtor com todos os atributos
+@Data
+@NoArgsConstructor
+@AllArgsConstructor
 public class User {
 
     @Id
@@ -21,6 +23,4 @@ public class User {
     private String password;
 
     private String email;
-
-    private String role;
 }
