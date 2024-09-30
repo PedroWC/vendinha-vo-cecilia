@@ -6,7 +6,7 @@
 
 ### **Autenticação (AuthController)**
 
-#### POST /api/auth/logi
+#### POST /api/auth/login
 
     -> Descrição: Autentica um usuário e retorna um token JWT para aces.
     -> Parâmetros: `LoginDTO` (JSON no corpo da requisição) conten:
@@ -147,7 +147,6 @@ Representa as informações de um produto.
     - `description` (String): Descrição do produto (opcional).
     - `price` (Double): Preço do produto (obrigatório).
     - `quantity` (Integer): Quantidade disponível em estoque (obrigatório).
-    - `categoryId` (Long): ID da categoria associada ao produto (obrigatório).
 
 ---
 
