@@ -9,9 +9,16 @@ import io.swagger.v3.oas.annotations.responses.ApiResponse;
 import io.swagger.v3.oas.annotations.responses.ApiResponses;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
+import org.springframework.core.io.FileSystemResource;
+import org.springframework.core.io.Resource;
+import org.springframework.http.HttpHeaders;
+import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.multipart.MultipartFile;
 
+import java.io.IOException;
 import java.util.List;
 
 @RestController
@@ -22,7 +29,9 @@ public class ProductController {
 
     private final ProductService productService;
 
-    // Injeção de dependências
+    @Value("${product.images.path}")
+    private String imageDirectory;  // Diretório onde as imagens são salvas
+
     @Autowired
     public ProductController(ProductService productService) {
         this.productService = productService;
@@ -60,9 +69,15 @@ public class ProductController {
             @ApiResponse(responseCode = "400", description = "Erro de validação", content = @Content),
             @ApiResponse(responseCode = "500", description = "Erro interno do servidor", content = @Content)
     })
-    @PostMapping
-    public ResponseEntity<ProductDTO> createProduct(@RequestBody ProductDTO productDTO) {
-        ProductDTO createdProduct = productService.saveProduct(productDTO);
+    @PostMapping(consumes = "multipart/form-data")
+    public ResponseEntity<ProductDTO> createProduct(
+            @RequestParam("name") String name,
+            @RequestParam("description") String description,
+            @RequestParam("price") Double price,
+            @RequestParam("quantityInStock") Integer quantityInStock,
+            @RequestParam("image") MultipartFile image) throws IOException {
+
+        ProductDTO createdProduct = productService.saveProduct(name, description, price, quantityInStock, image);
         return ResponseEntity.ok(createdProduct);
     }
 
@@ -73,9 +88,16 @@ public class ProductController {
             @ApiResponse(responseCode = "404", description = "Produto não encontrado", content = @Content),
             @ApiResponse(responseCode = "500", description = "Erro interno do servidor", content = @Content)
     })
-    @PutMapping("/{id}")
-    public ResponseEntity<ProductDTO> updateProduct(@PathVariable Long id, @RequestBody ProductDTO productDTO) {
-        ProductDTO updatedProduct = productService.updateProduct(id, productDTO);
+    @PutMapping(value = "/{id}", consumes = "multipart/form-data")
+    public ResponseEntity<ProductDTO> updateProduct(
+            @PathVariable Long id,
+            @RequestParam("name") String name,
+            @RequestParam("description") String description,
+            @RequestParam("price") Double price,
+            @RequestParam("quantityInStock") Integer quantityInStock,
+            @RequestParam(value = "image", required = false) MultipartFile image) throws IOException {
+
+        ProductDTO updatedProduct = productService.updateProduct(id, name, description, price, quantityInStock, image);
         return ResponseEntity.ok(updatedProduct);
     }
 
@@ -89,5 +111,25 @@ public class ProductController {
     public ResponseEntity<Void> deleteProduct(@PathVariable Long id) {
         productService.deleteProduct(id);
         return ResponseEntity.noContent().build();
+    }
+
+    @Operation(summary = "Servir uma imagem", description = "Servir a imagem de um produto com base no nome fornecido.")
+    @ApiResponses(value = {
+            @ApiResponse(responseCode = "200", description = "Imagem servida com sucesso", content = @Content(mediaType = "image/jpeg")),
+            @ApiResponse(responseCode = "404", description = "Imagem não encontrada", content = @Content),
+            @ApiResponse(responseCode = "500", description = "Erro interno do servidor", content = @Content)
+    })
+    @GetMapping("/image/{imageName}")
+    public ResponseEntity<Resource> getImage(@PathVariable String imageName) {
+        Resource image = new FileSystemResource(imageDirectory + imageName);
+
+        if (!image.exists()) {
+            return ResponseEntity.notFound().build();
+        }
+
+        return ResponseEntity.ok()
+                .contentType(MediaType.IMAGE_JPEG)
+                .header(HttpHeaders.CONTENT_DISPOSITION, "inline; filename=\"" + imageName + "\"")
+                .body(image);
     }
 }

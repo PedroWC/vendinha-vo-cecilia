@@ -1,28 +1,27 @@
 import React, { useEffect, useState } from "react";
 import ProductItem from "./ProductItem";
 import View from "../layout/View";
-import { getAllProducts } from '../../services/productService';
+import { getAllProducts } from "../../services/productService";
 
-const Products = () => {
+const Products = ({ view }) => {
   const [products, setProducts] = useState([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
-  const [view] = useState("column");  // Estado local para controlar o layout
 
   // Função para buscar os produtos do backend
   const fetchProducts = async () => {
     try {
-      const productsData = await getAllProducts();  // Usa a função de serviço para buscar os produtos
-      setProducts(productsData);  // Armazena os produtos no estado
+      const productsData = await getAllProducts(); // Usa a função de serviço para buscar os produtos
+      setProducts(productsData); // Armazena os produtos no estado
     } catch (err) {
-      setError('Erro ao carregar produtos');
+      setError("Erro ao carregar produtos");
     } finally {
-      setLoading(false);  // Fim do carregamento
+      setLoading(false); // Fim do carregamento
     }
   };
 
   useEffect(() => {
-    fetchProducts().then(() => {});
+    fetchProducts();
   }, []);
 
   if (loading) {
@@ -35,7 +34,7 @@ const Products = () => {
 
   return (
       <div className="container">
-        <div className="columns is-multiline">
+        <div className="row">
           {products.map((product) => (
               <View key={product.id} view={view}>
                 <ProductItem

@@ -1,7 +1,9 @@
 package com.vendinha.model;
 
 import jakarta.persistence.*;
-import lombok.*;
+import lombok.AllArgsConstructor;
+import lombok.Data;
+import lombok.NoArgsConstructor;
 
 @Entity
 @Table(name = "products")
@@ -24,4 +26,9 @@ public class Product {
 
     @Column(nullable = false)
     private Integer quantityInStock;
+
+    // Campo para armazenar a imagem no banco de dados como BLOB
+    @Lob
+    @Column(name = "image", columnDefinition = "BLOB")
+    private byte[] image;
 }

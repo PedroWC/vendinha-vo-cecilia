@@ -6,7 +6,9 @@ import com.vendinha.repository.ProductRepository;
 import com.vendinha.util.mapper.ProductMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.web.multipart.MultipartFile;
 
+import java.io.IOException;
 import java.util.List;
 import java.util.Optional;
 import java.util.stream.Collectors;
@@ -35,24 +37,49 @@ public class ProductService {
         return productMapper.toDto(product);
     }
 
-    public ProductDTO saveProduct(ProductDTO productDTO) {
-        if (productDTO.getName() == null || productDTO.getName().isEmpty() || productDTO.getPrice() <= 0) {
+    public ProductDTO saveProduct(String name,
+                                  String description,
+                                  Double price,
+                                  Integer quantityInStock,
+                                  MultipartFile image) throws IOException {
+        if (name == null || name.isEmpty() || price <= 0) {
             throw new IllegalArgumentException("Dados do produto inválidos!");
         }
-        Product product = productMapper.toEntity(productDTO);
+        Product product = new Product();
+        product.setName(name);
+        product.setDescription(description);
+        product.setPrice(price);
+        product.setQuantityInStock(quantityInStock);
+
+        // Armazena a imagem como BLOB no banco de dados
+        if (image != null && !image.isEmpty()) {
+            product.setImage(image.getBytes());
+        }
+
         product = productRepository.save(product);
         return productMapper.toDto(product);
     }
 
-    public ProductDTO updateProduct(Long id, ProductDTO productDTO) {
+    public ProductDTO updateProduct(Long id,
+                                    String name,
+                                    String description,
+                                    Double price,
+                                    Integer quantityInStock,
+                                    MultipartFile image) throws IOException {
         Optional<Product> productOptional = productRepository.findById(id);
 
         if (productOptional.isPresent()) {
             Product product = productOptional.get();
-            product.setName(productDTO.getName());
-            product.setDescription(productDTO.getDescription());
-            product.setPrice(productDTO.getPrice());
-            // Mapear outros campos se necessário
+            product.setName(name);
+            product.setDescription(description);
+            product.setPrice(price);
+            product.setQuantityInStock(quantityInStock);
+
+            // Atualiza a imagem, se fornecida
+            if (image != null && !image.isEmpty()) {
+                product.setImage(image.getBytes());
+            }
+
             Product updatedProduct = productRepository.save(product);
             return productMapper.toDto(updatedProduct);
         } else {
@@ -61,7 +88,7 @@ public class ProductService {
     }
 
     public void deleteProduct(Long id) {
-        Product product = productRepository.findById(id)
+        productRepository.findById(id)
                 .orElseThrow(() -> new RuntimeException("Produto não encontrado!"));
         productRepository.deleteById(id);
     }

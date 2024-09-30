@@ -22,9 +22,13 @@ export const getProductById = async (id) => {
 };
 
 // Cria um novo produto
-export const createProduct = async (productData) => {
+export const createProduct = async (formData) => {
     try {
-        const response = await api.post(endpoints.products.create, productData);
+        const response = await api.post(endpoints.products.create, formData, {
+            headers: {
+                'Content-Type': 'multipart/form-data',  // Especifica o tipo multipart/form-data
+            },
+        });
         return response.data;
     } catch (error) {
         throw error.response || error;
@@ -32,9 +36,13 @@ export const createProduct = async (productData) => {
 };
 
 // Atualiza um produto existente
-export const updateProduct = async (id, productData) => {
+export const updateProduct = async (id, formData) => {
     try {
-        const response = await api.put(endpoints.products.update(id), productData);
+        const response = await api.put(endpoints.products.update(id), formData, {
+            headers: {
+                'Content-Type': 'multipart/form-data',  // Especifica o tipo multipart/form-data
+            },
+        });
         return response.data;
     } catch (error) {
         throw error.response || error;

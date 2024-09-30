@@ -12,4 +12,7 @@ public class ProductDTO {
     private String description;
     private Double price;
     private Integer quantityInStock;
+    private String imageUrl;
+
+    private String imageBase64;
 }
