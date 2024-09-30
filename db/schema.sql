@@ -6,7 +6,7 @@ CREATE TABLE IF NOT EXISTS users (
     password VARCHAR(100) NOT NULL,
     email VARCHAR(100),
     role VARCHAR(50) DEFAULT 'USER',
-    CONSTRAINT username_unique UNIQUE (username)
+    CONSTRAINT email_unique UNIQUE (email)
 );
 
 -- Criação da tabela de Produtos
@@ -15,7 +15,5 @@ CREATE TABLE IF NOT EXISTS products (
     name VARCHAR(100) NOT NULL,
     description TEXT,
     price DECIMAL(10, 2) NOT NULL,
-    quantity_in_stock INT NOT NULL,
-    category_id BIGINT,
-    FOREIGN KEY (category_id) REFERENCES categories(id) ON DELETE SET NULL
+    quantity_in_stock INT NOT NULL
 );
