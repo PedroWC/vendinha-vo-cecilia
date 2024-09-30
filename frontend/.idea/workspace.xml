@@ -5,72 +5,21 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="725ebc8a-a992-4db4-ac17-c8505d38a85a" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/../backend/.idea/dataSources.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../backend/.idea/dictionaries/pedro.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../backend/.idea/remote-targets.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../backend/qodana.yaml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../backend/src/main/java/com/vendinha/config/SwaggerConfig.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../backend/src/main/resources/db/vendinha_db.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../backend/src/test/java/com/vendinha/service/AuthServiceTest.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../backend/target/classes/db/vendinha_db.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/components/Navbar.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/config/apiConfig.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/context/AuthContext.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/hooks/useAuth.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/pages/LoginPage.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/pages/ProductsPage.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/pages/UsersPage.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/routes.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/services/api.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/services/authService.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/services/productService.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/services/userService.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/styles/global.css" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../backend/.idea/encodings.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../backend/.idea/encodings.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../backend/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../backend/.idea/misc.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../backend/Dockerfile" beforeDir="false" afterPath="$PROJECT_DIR$/../backend/Dockerfile" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/components/users/Login.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/styles/login.css" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/../backend/HELP.md" beforeDir="false" afterPath="$PROJECT_DIR$/../backend/HELP.md" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../backend/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../backend/pom.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../backend/src/main/java/com/vendinha/config/SecurityConfig.java" beforeDir="false" afterPath="$PROJECT_DIR$/../backend/src/main/java/com/vendinha/config/SecurityConfig.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../backend/src/main/java/com/vendinha/controller/AuthController.java" beforeDir="false" afterPath="$PROJECT_DIR$/../backend/src/main/java/com/vendinha/controller/AuthController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../backend/src/main/java/com/vendinha/controller/CategoryController.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../backend/src/main/java/com/vendinha/controller/ProductController.java" beforeDir="false" afterPath="$PROJECT_DIR$/../backend/src/main/java/com/vendinha/controller/ProductController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../backend/src/main/java/com/vendinha/controller/StockMovementController.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../backend/src/main/java/com/vendinha/controller/UserController.java" beforeDir="false" afterPath="$PROJECT_DIR$/../backend/src/main/java/com/vendinha/controller/UserController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../backend/src/main/java/com/vendinha/dto/CategoryDTO.java" beforeDir="false" afterPath="$PROJECT_DIR$/../backend/src/main/java/com/vendinha/dto/LoginDTO.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../backend/src/main/java/com/vendinha/dto/StockMovementDTO.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../backend/src/main/java/com/vendinha/dto/UserDTO.java" beforeDir="false" afterPath="$PROJECT_DIR$/../backend/src/main/java/com/vendinha/dto/UserDTO.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../backend/src/main/java/com/vendinha/model/Category.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../backend/src/main/java/com/vendinha/model/StockMovement.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../backend/src/main/java/com/vendinha/model/User.java" beforeDir="false" afterPath="$PROJECT_DIR$/../backend/src/main/java/com/vendinha/model/User.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../backend/src/main/java/com/vendinha/repository/CategoryRepository.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../backend/src/main/java/com/vendinha/repository/StockMovementRepository.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../backend/src/main/java/com/vendinha/repository/UserRepository.java" beforeDir="false" afterPath="$PROJECT_DIR$/../backend/src/main/java/com/vendinha/repository/UserRepository.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../backend/src/main/java/com/vendinha/service/AuthService.java" beforeDir="false" afterPath="$PROJECT_DIR$/../backend/src/main/java/com/vendinha/service/AuthService.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../backend/src/main/java/com/vendinha/service/CategoryService.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../backend/src/main/java/com/vendinha/service/StockMovementService.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../backend/src/main/java/com/vendinha/service/UserService.java" beforeDir="false" afterPath="$PROJECT_DIR$/../backend/src/main/java/com/vendinha/service/UserService.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../backend/src/main/java/com/vendinha/util/AuthenticationRequest.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../backend/src/main/java/com/vendinha/util/mapper/CategoryMapper.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../backend/src/main/java/com/vendinha/util/mapper/StockMovementMapper.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../backend/src/main/java/com/vendinha/util/security/JwtRequestFilter.java" beforeDir="false" afterPath="$PROJECT_DIR$/../backend/src/main/java/com/vendinha/util/security/JwtRequestFilter.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../backend/src/main/java/com/vendinha/util/security/JwtUtil.java" beforeDir="false" afterPath="$PROJECT_DIR$/../backend/src/main/java/com/vendinha/util/security/JwtUtil.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../backend/src/main/resources/application.properties" beforeDir="false" afterPath="$PROJECT_DIR$/../backend/src/main/resources/application.properties" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../backend/src/test/java/com/vendinha/controller/AuthControllerIntegrationTest.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../backend/src/test/java/com/vendinha/controller/CategoryControllerIntegrationTest.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../backend/src/test/java/com/vendinha/controller/ProductControllerIntegrationTest.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../backend/src/test/java/com/vendinha/controller/StockMovementControllerIntegrationTest.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../backend/src/test/java/com/vendinha/controller/UserControllerIntegrationTest.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../backend/src/test/java/com/vendinha/security/JwtUtilTest.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../backend/src/test/java/com/vendinha/service/CategoryServiceTest.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../backend/src/test/java/com/vendinha/service/StockMovementServiceTest.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../backend/src/test/java/com/vendinha/service/UserServiceTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/../backend/src/test/java/com/vendinha/service/UserServiceTest.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../backend/target/classes/application.properties" beforeDir="false" afterPath="$PROJECT_DIR$/../backend/target/classes/application.properties" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../backend/target/generated-sources/annotations/com/vendinha/util/mapper/CategoryMapperImpl.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../backend/target/generated-sources/annotations/com/vendinha/util/mapper/ProductMapperImpl.java" beforeDir="false" afterPath="$PROJECT_DIR$/../backend/target/generated-sources/annotations/com/vendinha/util/mapper/ProductMapperImpl.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../backend/target/generated-sources/annotations/com/vendinha/util/mapper/StockMovementMapperImpl.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../backend/target/generated-sources/annotations/com/vendinha/util/mapper/UserMapperImpl.java" beforeDir="false" afterPath="$PROJECT_DIR$/../backend/target/generated-sources/annotations/com/vendinha/util/mapper/UserMapperImpl.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../db/schema.sql" beforeDir="false" afterPath="$PROJECT_DIR$/../db/schema.sql" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/App.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/App.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/components/Navbar.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/config/apiConfig.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/config/apiConfig.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/pages/LoginPage.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/pages/ProductsPage.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/pages/UsersPage.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/users/Users.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/routes.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/routes.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/services/api.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/services/api.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/styles/App.css" beforeDir="false" afterPath="$PROJECT_DIR$/src/styles/App.css" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/styles/global.css" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/users/Signup.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/styles/index.css" beforeDir="false" afterPath="$PROJECT_DIR$/src/styles/index.css" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -113,12 +62,16 @@
     &quot;node.js.selected.package.eslint&quot;: &quot;(autodetect)&quot;,
     &quot;node.js.selected.package.tslint&quot;: &quot;(autodetect)&quot;,
     &quot;nodejs_package_manager_path&quot;: &quot;npm&quot;,
+    &quot;settings.editor.selected.configurable&quot;: &quot;settings.sync&quot;,
     &quot;show.migrate.to.gradle.popup&quot;: &quot;false&quot;,
+    &quot;ts.external.directory.path&quot;: &quot;C:\\Program Files\\JetBrains\\WebStorm 2024.1.2\\plugins\\javascript-plugin\\jsLanguageServicesImpl\\external&quot;,
     &quot;vue.rearranger.settings.migration&quot;: &quot;true&quot;
   }
 }</component>
   <component name="RecentsManager">
     <key name="MoveFile.RECENT_KEYS">
+      <recent name="D:\dev\vendinha-vo-cecilia\frontend\src\components\users" />
+      <recent name="D:\dev\vendinha-vo-cecilia\frontend\src\components\pages" />
       <recent name="D:\dev\vendinha-vo-cecilia\frontend\src\styles" />
       <recent name="D:\dev\vendinha-vo-cecilia\frontend\src\asstes" />
     </key>
@@ -140,7 +93,8 @@
       <updated>1727458073919</updated>
       <workItem from="1727458074955" duration="622000" />
       <workItem from="1727549432744" duration="3054000" />
-      <workItem from="1727627271020" duration="413000" />
+      <workItem from="1727627271020" duration="3060000" />
+      <workItem from="1727634480875" duration="7725000" />
     </task>
     <servers />
   </component>

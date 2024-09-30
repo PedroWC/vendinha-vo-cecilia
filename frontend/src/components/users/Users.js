@@ -1,7 +1,7 @@
 import { useEffect, useState } from 'react';
 import axios from 'axios';
 
-function UsersPage() {
+function Users() {
     const [users, setUsers] = useState([]);
 
     useEffect(() => {
@@ -29,4 +29,4 @@ function UsersPage() {
     );
 }
 
-export default UsersPage;
+export default Users;
