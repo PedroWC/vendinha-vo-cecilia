@@ -61,7 +61,7 @@ public class UserController {
             @ApiResponse(responseCode = "400", description = "Requisição inválida",
                     content = @Content(mediaType = "application/json"))
     })
-    @PostMapping
+    @PostMapping("/signup")
     public ResponseEntity<UserDTO> createUser(@RequestBody UserDTO userDTO) {
         UserDTO createdUser = userService.saveUser(userDTO);
         return ResponseEntity.status(201).body(createdUser);

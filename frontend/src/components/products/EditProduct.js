@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, {useState, useEffect, useCallback} from "react";
 import { useNavigate, useParams } from "react-router-dom";
 import { getProductById, updateProduct } from "../../services/productService";  // Importa as funções de serviço
 
@@ -13,9 +13,9 @@ const EditProduct = () => {
   const [error, setError] = useState(null);
 
   // Função para carregar os detalhes do produto do backend
-  const loadProduct = async () => {
+  const loadProduct = useCallback(async () => {
     try {
-      const product = await getProductById(id);  // Usa a função getProductById para buscar o produto
+      const product = await getProductById(id);
       setName(product.name);
       setDescription(product.description);
       setPrice(product.price);
@@ -24,11 +24,11 @@ const EditProduct = () => {
     } catch (error) {
       setError('Erro ao carregar produto');
     }
-  };
+  }, [id]);
 
   useEffect(() => {
-    loadProduct().then(() => {});
-  }, [id]);
+    loadProduct();
+  }, [loadProduct]);
 
   const onSubmit = async (e) => {
     e.preventDefault();

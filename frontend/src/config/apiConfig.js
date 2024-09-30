@@ -1,4 +1,4 @@
-const API_BASE_URL = 'http://localhost:8080/api';  // Base URL da sua API
+const API_BASE_URL = 'http://localhost:8181/api';  // Base URL da sua API
 
 export const endpoints = {
     auth: {
@@ -14,7 +14,7 @@ export const endpoints = {
     users: {
         getAll: `${API_BASE_URL}/users`,
         getById: (id) => `${API_BASE_URL}/users/${id}`,
-        create: `${API_BASE_URL}/users`,
+        create: `${API_BASE_URL}/users/signup`,
         update: (id) => `${API_BASE_URL}/users/${id}`,
         delete: (id) => `${API_BASE_URL}/users/${id}`,
     },

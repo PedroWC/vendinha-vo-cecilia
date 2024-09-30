@@ -21,7 +21,6 @@ import java.io.IOException;
 public class JwtRequestFilter extends OncePerRequestFilter {
 
     private final UserService userService;
-
     private final JwtUtil jwtUtil;
 
     @Autowired
@@ -55,11 +54,9 @@ public class JwtRequestFilter extends OncePerRequestFilter {
         }
 
         if (email != null && SecurityContextHolder.getContext().getAuthentication() == null) {
-
             UserDetails userDetails = this.userService.loadUserByEmail(email);
 
             if (jwtUtil.validateToken(jwtToken, userDetails)) {
-
                 UsernamePasswordAuthenticationToken authentication = new UsernamePasswordAuthenticationToken(
                         userDetails, null, userDetails.getAuthorities());
                 authentication.setDetails(new WebAuthenticationDetailsSource().buildDetails(request));
@@ -68,5 +65,12 @@ public class JwtRequestFilter extends OncePerRequestFilter {
             }
         }
         chain.doFilter(request, response);
+    }
+
+    // Este método especifica quais caminhos não serão filtrados
+    @Override
+    protected boolean shouldNotFilter(HttpServletRequest request) throws ServletException {
+        String path = request.getServletPath();
+        return path.equals("/api/auth/login") || path.equals("/api/users/sigunp"); // Ignora o filtro para login e criação de usuário
     }
 }

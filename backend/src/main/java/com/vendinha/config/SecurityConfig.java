@@ -43,12 +43,13 @@ public class SecurityConfig {
         http
                 .csrf(AbstractHttpConfigurer::disable)
                 .authorizeHttpRequests(auth -> auth
-                        .requestMatchers("/**").permitAll() // Endpoints de autenticação públicos
-                        .anyRequest().authenticated() // Outros endpoints autenticados
+                        .requestMatchers("/api/auth/login", "/api/users/signup").permitAll()  // Permite acesso público a login e criação de usuário
+                        .anyRequest().authenticated()  // Outras requisições precisam de autenticação
                 )
                 .sessionManagement(sess -> sess.sessionCreationPolicy(SessionCreationPolicy.STATELESS)); // JWT é stateless
 
-        http.addFilterBefore(jwtRequestFilter, UsernamePasswordAuthenticationFilter.class); // Adicionar o filtro JWT
+        // Adiciona o filtro JWT antes do UsernamePasswordAuthenticationFilter
+        http.addFilterBefore(jwtRequestFilter, UsernamePasswordAuthenticationFilter.class);
 
         return http.build();
     }
