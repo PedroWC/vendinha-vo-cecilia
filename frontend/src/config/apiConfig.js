@@ -5,9 +5,9 @@ export const endpoints = {
         login: `${API_BASE_URL}/auth/login`,
     },
     products: {
-        getAll: `${API_BASE_URL}/product`,
+        getAll: `${API_BASE_URL}/products`,
         getById: (id) => `${API_BASE_URL}/products/${id}`,
-        create: `${API_BASE_URL}/product`,
+        create: `${API_BASE_URL}/products`,
         update: (id) => `${API_BASE_URL}/products/${id}`,
         delete: (id) => `${API_BASE_URL}/products/${id}`,
     },

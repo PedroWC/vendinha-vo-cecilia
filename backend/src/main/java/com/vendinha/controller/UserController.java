@@ -17,6 +17,7 @@ import java.util.List;
 @RestController
 @RequestMapping("/api/users")
 @Tag(name = "Usuários", description = "Gerenciamento de usuários")
+@CrossOrigin(origins = "http://localhost:3000") // Permite CORS para este controlador
 public class UserController {
 
     private final UserService userService;

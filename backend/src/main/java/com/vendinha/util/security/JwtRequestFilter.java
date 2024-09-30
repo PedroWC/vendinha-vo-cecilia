@@ -1,8 +1,6 @@
 package com.vendinha.util.security;
 
-import com.vendinha.service.UserService;
-import io.jsonwebtoken.ExpiredJwtException;
-import io.jsonwebtoken.JwtException;
+import com.vendinha.service.MyUserDetailsService;
 import jakarta.servlet.FilterChain;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.http.HttpServletRequest;
@@ -20,57 +18,60 @@ import java.io.IOException;
 @Component
 public class JwtRequestFilter extends OncePerRequestFilter {
 
-    private final UserService userService;
     private final JwtUtil jwtUtil;
 
+    private final MyUserDetailsService userDetailsService;
+
     @Autowired
-    public JwtRequestFilter(UserService userService, JwtUtil jwtUtil) {
-        this.userService = userService;
+    public JwtRequestFilter(JwtUtil jwtUtil, MyUserDetailsService userDetailsService) {
         this.jwtUtil = jwtUtil;
+        this.userDetailsService = userDetailsService;
     }
 
     @Override
     protected void doFilterInternal(HttpServletRequest request, HttpServletResponse response, FilterChain chain)
             throws ServletException, IOException {
 
-        final String requestTokenHeader = request.getHeader("Authorization");
-
-        String email = null;
-        String jwtToken = null;
-
-        if (requestTokenHeader != null && requestTokenHeader.startsWith("Bearer ")) {
-            jwtToken = requestTokenHeader.substring(7);
-            try {
-                email = jwtUtil.getUsernameFromToken(jwtToken);
-            } catch (IllegalArgumentException e) {
-                System.out.println("Não foi possível obter o token JWT");
-            } catch (ExpiredJwtException e) {
-                System.out.println("O token JWT expirou");
-            } catch (JwtException e) {
-                System.out.println("Token JWT inválido");
-            }
-        } else {
-            logger.warn("JWT Token não começa com Bearer String");
+        // Ignorar os endpoints públicos
+        String path = request.getRequestURI();
+        if (path.equals("/api/auth/login") || path.equals("/api/users/signup")) {
+            chain.doFilter(request, response);
+            return;
         }
 
-        if (email != null && SecurityContextHolder.getContext().getAuthentication() == null) {
-            UserDetails userDetails = this.userService.loadUserByEmail(email);
+        final String authorizationHeader = request.getHeader("Authorization");
 
-            if (jwtUtil.validateToken(jwtToken, userDetails)) {
+        String username = null;
+        String jwt = null;
+
+        // Verifica se o token JWT começa com 'Bearer'
+        if (authorizationHeader != null && authorizationHeader.startsWith("Bearer ")) {
+            jwt = authorizationHeader.substring(7); // Remove 'Bearer ' da string do token
+            try {
+                username = jwtUtil.getUsernameFromToken(jwt); // Extrai o username do token
+            } catch (Exception e) {
+                logger.warn("Token JWT inválido", e); // Log de erro caso ocorra falha na extração
+            }
+        }
+
+        // Verifica se o usuário não está autenticado no contexto de segurança do Spring
+        if (username != null && SecurityContextHolder.getContext().getAuthentication() == null) {
+
+            UserDetails userDetails = this.userDetailsService.loadUserByUsername(username);
+
+            // Valida o token utilizando o método do JwtUtil
+            if (jwtUtil.validateToken(jwt, userDetails)) {
+
                 UsernamePasswordAuthenticationToken authentication = new UsernamePasswordAuthenticationToken(
                         userDetails, null, userDetails.getAuthorities());
                 authentication.setDetails(new WebAuthenticationDetailsSource().buildDetails(request));
 
+                // Define a autenticação no contexto de segurança
                 SecurityContextHolder.getContext().setAuthentication(authentication);
             }
         }
-        chain.doFilter(request, response);
-    }
 
-    // Este método especifica quais caminhos não serão filtrados
-    @Override
-    protected boolean shouldNotFilter(HttpServletRequest request) throws ServletException {
-        String path = request.getServletPath();
-        return path.equals("/api/auth/login") || path.equals("/api/users/sigunp"); // Ignora o filtro para login e criação de usuário
+        // Continua com o processamento do filtro
+        chain.doFilter(request, response);
     }
 }

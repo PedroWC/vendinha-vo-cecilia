@@ -12,7 +12,7 @@ api.interceptors.request.use((config) => {
     const token = localStorage.getItem('token');
 
     // Verifica se a URL não é de login ou criação de usuário
-    if (!config.url.includes('/auth/login') && !(config.url === '/api/users' && config.method === 'post')) {
+    if (!config.url.includes('/api/auth/login') && !(config.url === '/api/users' && config.method === 'post')) {
         if (token) {
             config.headers.Authorization = `Bearer ${token}`;
         }

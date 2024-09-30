@@ -3,10 +3,13 @@ package com.vendinha.util.security;
 import io.jsonwebtoken.Claims;
 import io.jsonwebtoken.Jwts;
 import io.jsonwebtoken.SignatureAlgorithm;
+import io.jsonwebtoken.security.Keys;
+import jakarta.annotation.PostConstruct;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Component;
 
+import java.security.Key;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.Map;
@@ -16,7 +19,15 @@ import java.util.function.Function;
 public class JwtUtil {
 
     @Value("${jwt.secret}")
-    private String SECRET_KEY;
+    private String secretString; // Nome da variável alterado para diferenciar do tipo Key
+
+    private Key SECRET_KEY; // Key apropriada para o algoritmo HS256
+
+    // Inicializa a chave secreta
+    @PostConstruct
+    public void init() {
+        SECRET_KEY = Keys.hmacShaKeyFor(secretString.getBytes()); // Gera a chave binária adequada
+    }
 
     // Extrai o username do token JWT
     public String getUsernameFromToken(String token) {
@@ -35,8 +46,9 @@ public class JwtUtil {
 
     // Obtém qualquer informação do token
     private Claims getAllClaimsFromToken(String token) {
-        return Jwts.parser()
+        return Jwts.parserBuilder()
                 .setSigningKey(SECRET_KEY)
+                .build()
                 .parseClaimsJws(token)
                 .getBody();
     }
@@ -55,13 +67,12 @@ public class JwtUtil {
 
     // Cria o token JWT
     private String createToken(Map<String, Object> claims, String subject) {
-
         return Jwts.builder()
                 .setClaims(claims)
                 .setSubject(subject)
                 .setIssuedAt(new Date(System.currentTimeMillis()))
                 .setExpiration(new Date(System.currentTimeMillis() + 1000 * 60 * 60 * 10)) // Token válido por 10 horas
-                .signWith(SignatureAlgorithm.HS256, SECRET_KEY)
+                .signWith(SECRET_KEY, SignatureAlgorithm.HS256) // Usa a chave segura gerada
                 .compact();
     }
 

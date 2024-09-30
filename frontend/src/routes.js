@@ -1,4 +1,4 @@
-import {Routes, Route, Navigate} from 'react-router-dom';
+import { Routes, Route, Navigate } from 'react-router-dom';
 import Users from "./components/users/Users";
 import Login from "./components/users/Login";
 import Home from "./components/pages/Home";
@@ -11,9 +11,9 @@ function RoutesConfig() {
         <Routes>
             <Route path="/" element={<Navigate to="/login" />} />
             <Route path="/login" element={<Login />} />
-            <Route exact path="/home" component={Home} />
-            <Route exact path="/addProduct" component={AddProduct} />
-            <Route exact path="/editProduct/:id" component={EditProduct} />
+            <Route path="/home" element={<Home />} />  {/* Substituindo `component` por `element` */}
+            <Route path="/addProduct" element={<AddProduct />} />  {/* Usando `element` */}
+            <Route path="/editProduct/:id" element={<EditProduct />} />  {/* Usando `element` */}
             <Route path="/users" element={<Users />} />
             <Route path="/signup" element={<Signup />} />
         </Routes>

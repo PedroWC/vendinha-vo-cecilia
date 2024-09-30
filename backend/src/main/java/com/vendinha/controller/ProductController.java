@@ -17,6 +17,7 @@ import java.util.List;
 @RestController
 @RequestMapping("/api/products")
 @Tag(name = "Product", description = "API para operações com produtos")
+@CrossOrigin(origins = "http://localhost:3000") // Permite CORS para este controlador
 public class ProductController {
 
     private final ProductService productService;

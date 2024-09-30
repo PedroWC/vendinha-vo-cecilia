@@ -3,18 +3,18 @@ import { Link } from "react-router-dom";
 
 const Navbar = () => {
   return (
-    <nav class="navbar">
-      <div class="container">
-        <div class="navbar-brand">
-          <a class="navbar-item" href="/">
-            <i class="fas fa-store fa-2x"></i>
+    <nav className="navbar">
+      <div className="container">
+        <div className="navbar-brand">
+          <a className="navbar-item" href="/">
+            <i className="fas fa-store fa-2x"></i>
           </a>
         </div>
-        <div class="navbar-menu">
-          <div class="navbar-end">
-            <div class="navbar-item">
-              <div class="buttons">
-                <Link to="/addProduct" class="button is-primary" href="#">
+        <div className="navbar-menu">
+          <div className="navbar-end">
+            <div className="navbar-item">
+              <div className="buttons">
+                <Link to="/addProduct" className="button is-primary" href="#">
                   <strong>Add Product</strong>
                 </Link>
               </div>
