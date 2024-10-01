@@ -29,6 +29,6 @@ public class Product {
 
     // Campo para armazenar a imagem no banco de dados como BLOB
     @Lob
-    @Column(name = "image", columnDefinition = "BLOB")
+    @Column(name = "image", columnDefinition = "MEDIUMBLOB")
     private byte[] image;
 }

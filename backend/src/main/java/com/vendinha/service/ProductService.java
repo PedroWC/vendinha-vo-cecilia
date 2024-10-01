@@ -53,6 +53,10 @@ public class ProductService {
 
         // Armazena a imagem como BLOB no banco de dados
         if (image != null && !image.isEmpty()) {
+            long maxSize = 1024 * 1024 * 16; // Limite de 16MB para MEDIUMBLOB, por exemplo
+            if (image.getSize() > maxSize) {
+                throw new IllegalArgumentException("Imagem muito grande! O limite é 16MB.");
+            }
             product.setImage(image.getBytes());
         }
 
