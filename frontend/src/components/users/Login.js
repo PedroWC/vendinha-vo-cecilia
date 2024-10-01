@@ -63,14 +63,14 @@ function Login() {
 
                     <div className="field">
                         <div className="control">
-                            <button className="button is-primary is-fullwidth" type="submit">Login</button>
+                            <button className="button button-login is-primary is-fullwidth" type="submit">Login</button>
                         </div>
                     </div>
                 </form>
 
                 <div className="field">
                     <div className="control">
-                        <button className="button is-link is-fullwidth" onClick={handleSignup}>
+                        <button className="button button-login is-link is-fullwidth" onClick={handleSignup}>
                             Sign Up
                         </button>
                     </div>

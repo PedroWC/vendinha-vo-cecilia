@@ -1,9 +1,11 @@
 import React from "react";
-import { Link } from "react-router-dom";
+import {useNavigate} from "react-router-dom";
 import { deleteProduct } from "../../services/productService";
 import { Card, Button } from "react-bootstrap";
 
 const ProductItem = ({ product, onDelete }) => {
+    const navigate = useNavigate();
+
     // Função para deletar o produto via API
     const handleDeleteProduct = async (id) => {
         try {
@@ -12,20 +14,24 @@ const ProductItem = ({ product, onDelete }) => {
         } catch (error) {
             console.error("Erro ao deletar o produto:", error);
         }
+    }
+
+    const toEdit = (id) => {
+        navigate("/editProduct/" + id);
     };
 
     return (
         <Card ClassName="h-100 shadow-sm">
         <div className="box box__custom">
-            <Link
-                to={`/editProduct/${product.id}`}
-                className="button button-edit is-warning"
-            >
+            <button
+                onClick={() => toEdit(product.id)}
+                className="btnedit button button-edit"
+                >
                 Edit
-            </Link>
+            </button>
             <Button
                 onClick={() => handleDeleteProduct(product.id)}
-                className="button button-delete is-danger"
+                className="btndelete button button-delete"
             >
                 Delete
             </Button>

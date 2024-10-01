@@ -1,35 +1,10 @@
-import React, { useEffect, useState } from "react";
+import React from "react";
 import ProductItem from "./ProductItem";
 import View from "../layout/View";
-import { getAllProducts } from "../../services/productService";
 
-const Products = ({ view }) => {
-  const [products, setProducts] = useState([]);
-  const [loading, setLoading] = useState(true);
-  const [error, setError] = useState(null);
-
-  // Função para buscar os produtos do backend
-  const fetchProducts = async () => {
-    try {
-      const productsData = await getAllProducts(); // Usa a função de serviço para buscar os produtos
-      setProducts(productsData); // Armazena os produtos no estado
-    } catch (err) {
-      setError("Erro ao carregar produtos");
-    } finally {
-      setLoading(false); // Fim do carregamento
-    }
-  };
-
-  useEffect(() => {
-    fetchProducts().then(() => {});
-  }, []);
-
-  if (loading) {
-    return <p>Carregando produtos...</p>;
-  }
-
-  if (error) {
-    return <p>{error}</p>;
+const Products = ({ products, setProducts, view }) => {
+  if (products.length === 0) {
+    return <p>Nenhum produto encontrado.</p>;
   }
 
   return (

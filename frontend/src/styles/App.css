@@ -53,3 +53,21 @@
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
   border-radius: 10px;
 }
+
+.btnedit {
+  background-color: #8cafd1;
+  border: 0 !important;
+  border-top-left-radius: 4px;
+}
+.btnedit:hover {
+  background-color: blue;
+}
+
+.btndelete {
+  background-color: #d68f97;
+  border: 0 !important;
+  border-top-right-radius: 4px;
+}
+.btndelete:hover {
+  background-color: red;
+}

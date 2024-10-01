@@ -43,7 +43,6 @@ const Home = () => {
             <Navbar />
             <div className="container-fluid">
                 <div className="row">
-                    {/* Sidebar ocupa 3 colunas e os produtos 9 colunas */}
                     <div className="col-md-3 col-sm-12">
                         <div className="box">
                             <Sidebar
@@ -54,7 +53,11 @@ const Home = () => {
                         </div>
                     </div>
                     <div className="col-md-9 col-sm-12">
-                        <Products products={filteredProducts} view={view} />
+                        <Products
+                            products={filteredProducts}
+                            setProducts={setProducts}
+                            view={view}
+                        />
                     </div>
                 </div>
             </div>
