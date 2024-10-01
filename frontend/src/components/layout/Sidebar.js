@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import '@fortawesome/fontawesome-free/css/all.min.css';
 
 const Sidebar = ({ totalItems, onSearchTextChange, onViewChange }) => {
     const [view, setView] = useState("column"); // Estado local para o tipo de exibição
