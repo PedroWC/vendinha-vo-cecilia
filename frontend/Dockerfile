@@ -13,6 +13,10 @@ RUN npm install --legacy-peer-deps
 # Copia o código-fonte do projeto para o container
 COPY . .
 
+# Passe a variável de ambiente durante o build do React
+ARG REACT_APP_API_URL
+ENV REACT_APP_API_URL=$REACT_APP_API_URL
+
 # Executa o build da aplicação
 RUN npm run build
 
