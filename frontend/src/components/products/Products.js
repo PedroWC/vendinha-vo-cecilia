@@ -21,7 +21,7 @@ const Products = ({ view }) => {
   };
 
   useEffect(() => {
-    fetchProducts();
+    fetchProducts().then(() => {});
   }, []);
 
   if (loading) {

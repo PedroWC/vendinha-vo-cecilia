@@ -1,14 +1,42 @@
-import React, { Fragment, useState } from "react";
+import React, {Fragment, useEffect, useState} from "react";
 import Navbar from "../layout/Navbar";
 import Sidebar from "../layout/Sidebar";
 import Products from "../products/Products";
+import { getAllProducts } from '../../services/productService';
 
 const Home = () => {
-    const [view, setView] = useState("column"); // Estado para alternar entre visualizações de coluna e linha
+    const [products, setProducts] = useState([]);
+    const [searchText, setSearchText] = useState("");
+    const [view, setView] = useState("column");
 
-    const handleViewChange = (viewType) => {
-        setView(viewType); // Atualiza o estado de visualização
+    // Função para buscar produtos
+    const fetchProducts = async () => {
+        try {
+            const productsData = await getAllProducts();
+            setProducts(productsData);
+        } catch (err) {
+            console.error("Erro ao carregar produtos:", err);
+        }
     };
+
+    useEffect(() => {
+        fetchProducts().then(() => {});
+    }, []);
+
+    // Função de pesquisa
+    const handleSearchTextChange = (text) => {
+        setSearchText(text);
+    };
+
+    // Função para alterar visualização
+    const handleViewChange = (viewType) => {
+        setView(viewType);
+    };
+
+    // Filtra os produtos de acordo com o texto da pesquisa
+    const filteredProducts = products.filter((product) =>
+        product.name.toLowerCase().includes(searchText.toLowerCase())
+    );
 
     return (
         <Fragment>
@@ -18,11 +46,15 @@ const Home = () => {
                     {/* Sidebar ocupa 3 colunas e os produtos 9 colunas */}
                     <div className="col-md-3 col-sm-12">
                         <div className="box">
-                            <Sidebar onViewChange={handleViewChange} totalItems={0} />
+                            <Sidebar
+                                totalItems={products.length}
+                                onSearchTextChange={handleSearchTextChange}
+                                onViewChange={handleViewChange}
+                            />
                         </div>
                     </div>
                     <div className="col-md-9 col-sm-12">
-                        <Products view={view} />
+                        <Products products={filteredProducts} view={view} />
                     </div>
                 </div>
             </div>

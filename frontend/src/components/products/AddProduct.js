@@ -48,7 +48,7 @@ const AddProduct = () => {
       // Faz a requisição POST para o backend com FormData
       await createProduct(formData);
       setSuccess(true);  // Exibe mensagem de sucesso
-      navigate("/");  // Redireciona para a página principal após o sucesso
+      navigate("/home");  // Redireciona para a página principal após o sucesso
     } catch (err) {
       // Tratamento de erros detalhado
       if (err.response && err.response.status === 400) {

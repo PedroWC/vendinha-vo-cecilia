@@ -15,14 +15,14 @@ const Sidebar = ({ totalItems, onSearchTextChange, onViewChange }) => {
     // Função para alterar o texto de busca
     const handleSearchTextChange = (e) => {
         setSearchText(e.target.value);
-        if (onSearchTextChange) {
-            onSearchTextChange(e.target.value); // Notifica o componente pai
-        }
+        onSearchTextChange(e.target.value); // Notifica o componente pai
     };
 
     return (
         <div className="sidebar">
-            <h2>({totalItems}) products</h2>
+            <h2 className="subtitle">
+                ({totalItems}) products
+            </h2>
             <div className="btn-group">
                 <button
                     className={`btn ${view === "column" ? "btn-dark" : "btn-light"}`}
