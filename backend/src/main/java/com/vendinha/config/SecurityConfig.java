@@ -51,7 +51,7 @@ public class SecurityConfig {
         http
                 .csrf(AbstractHttpConfigurer::disable)
                 .authorizeHttpRequests(auth -> auth
-                        .requestMatchers("/api/auth/login", "/api/users/signup").permitAll()  // Permite acesso público
+                        .requestMatchers("/api/auth/login", "/api/users/signup", "/swagger-ui/**", "/v3/api-docs/**").permitAll()  // Permite acesso público
                         .anyRequest().authenticated()  // Outras requisições precisam de autenticação
                 )
                 .sessionManagement(sess -> sess.sessionCreationPolicy(SessionCreationPolicy.STATELESS))  // JWT é stateless
