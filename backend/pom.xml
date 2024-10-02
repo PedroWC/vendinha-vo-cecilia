@@ -56,10 +56,13 @@
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-web</artifactId>
         </dependency>
+        <!-- https://mvnrepository.com/artifact/commons-fileupload/commons-fileupload -->
         <dependency>
             <groupId>commons-fileupload</groupId>
             <artifactId>commons-fileupload</artifactId>
+            <version>1.5</version>
         </dependency>
+
         <!-- Ferramenta que facilita o desenvolvimento, permitindo atualizações automáticas e um ciclo de desenvolvimento mais ágil. -->
         <dependency>
             <groupId>org.springframework.boot</groupId>
