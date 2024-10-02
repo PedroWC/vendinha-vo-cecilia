@@ -12,7 +12,7 @@ export const AuthProvider = ({ children }) => {
     // Função para autenticar o usuário e salvar o token JWT
     const login = (token) => {
         localStorage.setItem('token', token);
-        // Decodificar o token e obter os dados do usuário (ou fazer uma requisição)
+        // Decodificar o token e obter os dados do usuário
         setUser({ token });
     };
 

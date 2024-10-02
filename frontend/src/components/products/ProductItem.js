@@ -38,7 +38,6 @@ const ProductItem = ({ product, onDelete }) => {
             <h1 className="title is-1">
                 {product.imageBase64 && (
                     <div className="d-flex justify-content-center mt-3">
-                        {/* Wrapper flexível para centralizar a imagem */}
                         <img
                             src={`data:image/jpeg;base64,${product.imageBase64}`}
                             alt={product.name}

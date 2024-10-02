@@ -32,7 +32,6 @@ public class ProductMapper {
         product.setPrice(productDTO.getPrice());
         product.setQuantityInStock(productDTO.getQuantityInStock());
 
-        // Não lidamos com a imagem aqui, pois o DTO não recebe diretamente a imagem em BLOB
         return product;
     }
 }

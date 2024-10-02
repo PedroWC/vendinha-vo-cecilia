@@ -13,7 +13,7 @@ RUN npm install --legacy-peer-deps
 # Copia o código-fonte do projeto para o container
 COPY . .
 
-# Passe a variável de ambiente durante o build do React
+# Passa a variável de ambiente durante o build do React
 ARG REACT_APP_API_URL
 ENV REACT_APP_API_URL=$REACT_APP_API_URL
 
@@ -29,10 +29,7 @@ RUN rm -rf /usr/share/nginx/html/*
 # Copia os arquivos da build do React para a pasta onde o Nginx espera os arquivos
 COPY --from=build /app/build /usr/share/nginx/html
 
-# Copia um arquivo de configuração personalizado do Nginx, se necessário (opcional)
-# COPY nginx.conf /etc/nginx/nginx.conf
-
-# Exponha a porta 80 para acessar a aplicação
+# Expõe a porta 80 para acessar a aplicação
 EXPOSE 80
 
 # Inicia o Nginx

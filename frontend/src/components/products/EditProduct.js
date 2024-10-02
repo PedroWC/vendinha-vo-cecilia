@@ -10,9 +10,9 @@ const EditProduct = () => {
   const [description, setDescription] = useState("");
   const [price, setPrice] = useState("");
   const [quantityInStock, setQuantityInStock] = useState("");
-  const [image, setImage] = useState(null); // Para armazenar o arquivo de imagem
+  const [image, setImage] = useState(null);
   const [error, setError] = useState(null);
-  const [success, setSuccess] = useState(false); // Para exibir mensagem de sucesso
+  const [success, setSuccess] = useState(false);
 
   // Função para carregar os detalhes do produto do backend
   const loadProduct = useCallback(async () => {

@@ -9,7 +9,7 @@ const AddProduct = () => {
   const [description, setDescription] = useState("");
   const [price, setPrice] = useState("");
   const [quantityInStock, setQuantityInStock] = useState("");
-  const [image, setImage] = useState(null); // Armazena o arquivo da imagem
+  const [image, setImage] = useState(null);
   const [error, setError] = useState(null);
   const [success, setSuccess] = useState(false); // Para exibir mensagem de sucesso
 

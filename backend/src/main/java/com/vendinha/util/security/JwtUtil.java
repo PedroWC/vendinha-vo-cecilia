@@ -19,7 +19,7 @@ import java.util.function.Function;
 public class JwtUtil {
 
     @Value("${jwt.secret}")
-    private String secretString; // Nome da variável alterado para diferenciar do tipo Key
+    private String secretString;
 
     private Key SECRET_KEY; // Key apropriada para o algoritmo HS256
 

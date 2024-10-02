@@ -79,7 +79,7 @@ public class ProductService {
             product.setPrice(price);
             product.setQuantityInStock(quantityInStock);
 
-            // Atualiza a imagem, se fornecida
+            // Atualiza a imagem
             if (image != null && !image.isEmpty()) {
                 product.setImage(image.getBytes());
             }

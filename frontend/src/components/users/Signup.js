@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
-import { createUser } from '../../services/userService';  // Serviço de criação de usuário
+import { createUser } from '../../services/userService';
 import '../../styles/login.css';
 
 function Signup() {
