@@ -50,7 +50,7 @@ const ProductItem = ({ product, onDelete }) => {
                 <Card.Title>{product.name}</Card.Title>
                 <Card.Text>{product.description}</Card.Text>
                 <Card.Text className="text-muted">
-                    <span>R$ {product.price}/kg</span> <br />
+                    <span>R$ {product.price}/unid</span> <br />
                     <span>In Stock: {product.quantityInStock}</span>
                 </Card.Text>
             </Card.Body>
