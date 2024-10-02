@@ -1,19 +1,22 @@
--- db/schema.sql
--- Criação da tabela de Usuários
-CREATE TABLE IF NOT EXISTS users (
-    id BIGINT AUTO_INCREMENT PRIMARY KEY,
-    username VARCHAR(50) NOT NULL UNIQUE,
-    password VARCHAR(100) NOT NULL,
-    email VARCHAR(100),
-    role VARCHAR(50) DEFAULT 'USER',
-    CONSTRAINT email_unique UNIQUE (email)
-);
+CREATE DATABASE IF NOT EXISTS vendinha_db;
 
--- Criação da tabela de Produtos
+USE vendinha_db;
+
+-- Tabela: products
 CREATE TABLE IF NOT EXISTS products (
     id BIGINT AUTO_INCREMENT PRIMARY KEY,
-    name VARCHAR(100) NOT NULL,
-    description TEXT,
-    price DECIMAL(10, 2) NOT NULL,
-    quantity_in_stock INT NOT NULL
+    name VARCHAR(255),
+    description VARCHAR(255),
+    price DOUBLE,
+    quantity_in_stock INT,
+    image MEDIUMBLOB
+);
+
+-- Tabela: users
+CREATE TABLE IF NOT EXISTS users (
+    id BIGINT AUTO_INCREMENT PRIMARY KEY,
+    username VARCHAR(255),
+    password VARCHAR(255),
+    email VARCHAR(255) UNIQUE,
+    UNIQUE KEY email_unique (email)
 );
